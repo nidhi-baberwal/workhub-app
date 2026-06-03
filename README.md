@@ -2,6 +2,8 @@ TaskFlow SaaS - Collaborative Task Management Platform
 
 Live Demo
 
+frontend: https://workhub-app-tau.vercel.app
+
 Backend API:
 https://workhub-backend-nknb.onrender.com
 
