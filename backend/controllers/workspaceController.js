@@ -51,7 +51,7 @@ export const deleteWorkspace = async(req, res)=> {
             return res.status(404).json({
                message: "Workspace not found"
             });
-        }
+        
 
         //only owner can delete workspace
         if(workspace.owner.toString() !== req.user.id){

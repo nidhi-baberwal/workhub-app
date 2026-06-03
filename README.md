@@ -120,15 +120,16 @@ JWT
 bcrypt
 
 Testing:
-Cypress
+Cypress(E2E Testing)
 
 Tools:
 Git
 GitHub
 VS Code
+Postman(API Testing)
 
 project structure
-taskflow-saas/
+workhub-app/
 
 ├── backend/
 │   ├── controllers/
