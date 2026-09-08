@@ -1,5 +1,10 @@
 import express from "express";
-import { getWorkspaces, createWorkspace, deleteWorkspace, addMember } from "../controllers/workspaceController.js";
+import { 
+    getWorkspaces, 
+    createWorkspace,
+    updateWorkspace, 
+    deleteWorkspace, 
+    addMember } from "../controllers/workspaceController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 
 console.log(" WORKSPACE ROUTES LOADED");
@@ -19,6 +24,10 @@ router.delete("/:workspaceId",
     next();
   },
     deleteWorkspace
+);
+router.put("/:workspaceId",
+    authMiddleware,
+    updateWorkspace
 );
 
 export default router;

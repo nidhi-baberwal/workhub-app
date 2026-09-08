@@ -46,11 +46,12 @@ export const deleteWorkspace = async(req, res)=> {
 
         console.log(" Workspace found:", workspace);
 
-        if(!workspace)
+        if(!workspace){
             console.log(" Workspace not found");
             return res.status(404).json({
                message: "Workspace not found"
             });
+        }
         
 
         //only owner can delete workspace
@@ -151,5 +152,31 @@ export  const getWorkspaces = async(req,res) => {
      res.json(workspaces);
     } catch(error){
         res.status(500).json({message: error.message});
+    }
+};
+
+export const updateWorkspace = async(req, res) => {
+    try{
+        const{ workspaceId }= req.params;
+
+        const updated = await Workspace.findByIdAndUpdate(
+            workspaceId,
+            req.body,
+            { new: true }
+        );
+
+        if(!updated){
+            return res.status(404).json({
+                message: "Workspace not found"
+            });
+        } 
+
+        res.status(200).json({
+           message: "Workspace updated successfully",
+           workspace: updated
+           });
+
+        } catch(error){
+            res.status(500).json({message: error.message});
     }
 };

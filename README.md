@@ -2,10 +2,10 @@ TaskFlow SaaS - Collaborative Task Management Platform
 
 Live Demo
 
-frontend: https://workhub-app-tau.vercel.app
+frontend: https://workhub-joriw14sn-nidhi-baberwal-s-projects.vercel.app/
 
 Backend API:
-https://workhub-backend-nknb.onrender.com
+https://workhub-app-backend.onrender.com
 
 A full-stack SaaS application built with the MERN stack that enables teams to collaborate through shared workspaces, member management, and task tracking.
 
