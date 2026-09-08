@@ -8,11 +8,15 @@ export const getWorkspaces = () =>
 export const createWorkspace = (data) =>
     API.post("/workspaces", data);
 
-//delete workspace
-export const deleteWorkspace = (workspaceId) =>
-  API.delete(`/workspaces/${workspaceId}`);
-
 //add member
 export const addMember = (workspaceId, data) =>
     API.post(`/workspaces/${workspaceId}/members`, data);
+
+//update workspace
+export const updateWorkspace = (workspaceId, data) =>
+  API.put(`/workspaces/${workspaceId}`, data);
+
+//delete workspace
+export const deleteWorkspace = (workspaceId) =>
+  API.delete(`/workspaces/${workspaceId}`);
 

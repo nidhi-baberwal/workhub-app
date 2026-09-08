@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Register = ()=> {
     const{ register } = useAuth();
+    const navigate = useNavigate();
 
     const[form, setForm] = useState({
         name: "",
@@ -13,6 +15,8 @@ const Register = ()=> {
     const handleSubmit = (e) => {
         e.preventDefault();
         register(form);
+
+        navigate("/login");
     }
 
     return(
