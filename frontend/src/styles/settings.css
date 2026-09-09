@@ -41,3 +41,53 @@
 .btn-danger:hover {
   background: #dc2626;
 }
+
+/*TABLET*/
+
+@media (max-width: 768px) {
+
+  .settings-grid {
+    grid-template-columns: 1fr;
+
+    gap: 16px;
+  }
+
+  .settings-card {
+    padding: 18px;
+  }
+
+  .page-title {
+    margin-bottom: 16px;
+  }
+
+}
+
+/*MOBILE*/
+
+@media (max-width: 480px) {
+
+  .settings-grid {
+    gap: 12px;
+  }
+
+  .settings-card {
+    padding: 15px;
+
+    border-radius: 12px;
+  }
+
+  .page-title {
+    margin-bottom: 14px;
+
+    font-size: 20px;
+  }
+
+  .btn-danger {
+    width: 100%;
+
+    padding: 10px 12px;
+
+    font-size: 13px;
+  }
+
+}

@@ -1,5 +1,7 @@
 .workspace-card {
   width: 420px;
+  
+  max-width: calc(100% -32px);
 
   margin: 90px auto;
 
@@ -125,5 +127,61 @@
   transform: scale(0.98);
 }
 
+/*TABLET*/
 
+@media (max-width: 768px) {
+
+  .workspace-card {
+    width: 390px;
+    margin: 70px auto;
+    padding: 28px;
+  }
+
+  .workspace-title {
+    font-size: 25px;
+  }
+
+}
+
+
+/*MOBILE*/
+
+@media (max-width: 480px) {
+
+  .workspace-card {
+    width: 100%;
+    max-width: calc(100% - 24px);
+
+     margin: 40px auto;
+
+    padding: 22px 18px;
+
+    border-radius: 17px;
+  }
+
+  .workspace-title {
+    font-size: 22px;
+  }
+
+  .workspace-subtitle {
+    font-size: 13px;
+
+    margin-top: 6px;
+    margin-bottom: 18px;
+  }
+
+  .workspace-input {
+    padding: 12px 13px;
+    font-size: 14px;
+  }
+
+  .workspace-btn {
+    margin-top: 14px;
+
+     padding: 12px;
+
+    font-size: 14px;
+  }
+
+}
 

@@ -8,7 +8,7 @@ body {
 
 .auth-card {
   width: 380px;
-
+  max-width: calc(100% -32px);
   margin: 100px auto;
   padding: 32px;
 
@@ -116,4 +116,49 @@ body {
 
 .auth-btn:active {
   transform: scale(0.98);
+}
+
+/*TABLET*/
+@media (max-width: 768px){
+  .auth-card {
+    width: 360px;
+    margin: 70px auto;
+    padding: 28px;
+  }
+
+  .auth-title {
+    font-size: 21px;
+  }
+}
+
+/*MOBILE*/
+@media (max-width: 480px) {
+  .auth-card {
+    width: 100%;
+    max-width: calc(100% - 24px);
+
+    margin: 40px auto;
+    padding: 22px 18px;
+
+    border-radius: 15px;
+  }
+
+  .auth-title {
+    font-size: 20px;
+  }
+
+  .auth-subtitle {
+    font-size: 13px;
+  }
+
+  .auth-input {
+    padding: 11px 12px;
+    font-size: 14px;
+  }
+
+  .auth-btn {
+    padding: 11px;
+    font-size: 14px;
+  }
+
 }

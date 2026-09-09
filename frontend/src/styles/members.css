@@ -188,3 +188,150 @@
    background:#374151;
    color:white;
 }
+
+/*TABLET */
+
+@media (max-width: 768px) {
+
+  .add-member-card {
+    width: 390px;
+
+    padding: 24px;
+  }
+
+  .members-container {
+    padding: 20px;
+    margin-top: 24px;
+  }
+
+  .members-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .member-card {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+
+   .member-left {
+    gap: 12px;
+  }
+
+  .avatar {
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
+  }
+
+  .member-left h4 {
+    font-size: 15px;
+  }
+
+  .member-left p {
+    font-size: 13px;
+  }
+
+  .role-badge {
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+
+  .add-member-card {
+    width: 100%;
+
+    padding: 20px 16px;
+
+    border-radius: 15px;
+  }
+
+  .add-member-title {
+    font-size: 18px;
+
+    margin-bottom: 15px;
+  }
+
+  .add-member-card input,
+  .add-member-card select {
+    padding: 11px 12px;
+
+    margin-bottom: 12px;
+
+    font-size: 13px;
+  }
+
+  .full-btn {
+    padding: 11px;
+
+    font-size: 14px;
+  }
+
+
+  /* MEMBERS */
+
+  .members-container {
+    padding: 14px;
+
+    margin-top: 18px;
+
+    border-radius: 15px;
+  }
+
+  .members-title {
+    font-size: 21px;
+
+    margin-bottom: 16px;
+  }
+
+   /* MEMBER CARD */
+
+  .member-card {
+    align-items: flex-start;
+
+    padding: 12px;
+
+    gap: 10px;
+  }
+
+  .member-left {
+    gap: 10px;
+  }
+
+
+  /* AVATAR */
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+
+    font-size: 14px;
+  }
+
+   /* NAME */
+
+  .member-left h4 {
+    font-size: 14px;
+  }
+
+
+  /* EMAIL */
+
+  .member-left p {
+    font-size: 11px;
+  }
+
+
+  /* ROLE */
+
+  .role-badge {
+    padding: 6px 9px;
+
+    font-size: 11px;
+  }
+
+}

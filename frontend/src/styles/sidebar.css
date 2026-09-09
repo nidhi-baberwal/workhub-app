@@ -1,6 +1,7 @@
 .sidebar {
   width: 230px;
   height: 100%;
+  flex-shrink: 0;
   background: #0b1220;
   border-right: 1px solid rgba(255,255,255,0.08);
   padding: 20px;
@@ -58,4 +59,51 @@
 .menu-item:hover {
   background: rgba(255,255,255,0.05);
   color: #fff;
+}
+
+/*TABLET*/
+@media (max-width: 768px) {
+  .sidebar {
+    width: 190px;
+    padding: 16px;
+  }
+
+  .sidebar-title {
+    font-size: 15px;
+  }
+
+  .workspace-item,
+  .menu-item {
+    padding: 9px;
+    font-size: 14px;
+  }
+}
+
+/*MOBILE*/
+@media (max-width: 480px) {
+  .sidebar {
+    width: 150px;
+    padding: 12px;
+  }
+
+  .sidebar-title {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .workspace-item,
+  .menu-item {
+    padding: 8px;
+    margin: 5px 0;
+    font-size: 12px;
+  }
+
+  .divider {
+    margin: 14px 0;
+  }
+
+  .menu-title {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
 }

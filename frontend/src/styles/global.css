@@ -21,12 +21,28 @@ body {
 .layout-body {
   display: flex;
   flex: 1;
+  min-width: 0;
   overflow: hidden;
 }
 
 .main-content {
   flex: 1;
+  min-width: 0;
   padding: 24px;
   overflow-y: auto;
   background: linear-gradient(180deg, #0f172a, #0b1020);
 }
+
+/*Responsive css*/
+@media (max-width: 768px) {
+  .main-content {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 12px;
+  }
+}
+
