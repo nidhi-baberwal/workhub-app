@@ -1,0 +1,102 @@
+.task-form {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  background: #111827;
+  padding: 16px;
+  border-radius: 14px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+
+  margin-bottom: 20px;
+}
+
+/* Input field */
+.task-input {
+  flex: 1;
+  padding: 12px 14px;
+
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+
+  background: #0b1220;
+  color: #e5e7eb;
+
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.task-input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.2);
+}
+
+.task-select{
+   width:100%;
+   padding:14px 16px;
+   border-radius:12px;
+   border:1px solid rgba(255,255,255,0.08);
+   background:#0f172a;
+   color:white;
+   font-size:15px;
+   outline:none;
+   transition:0.3s ease;
+   margin-top:12px;
+}
+
+.task-select:focus{
+   border-color:#6d5dfc;
+   box-shadow:0 0 0 3px rgba(109,93,252,0.2);
+}
+
+.task-select option{
+   background:#111827;
+   color:white;
+}
+
+/* Button */
+.task-btn {
+  padding: 12px 18px;
+
+  background: #4f46e5;
+  color: white;
+
+  border: none;
+  border-radius: 10px;
+
+  cursor: pointer;
+  font-weight: 500;
+
+  transition: 0.2s ease;
+}
+
+.task-btn:hover {
+  background: #4338ca;
+  transform: translateY(-1px);
+}
+
+.task-btn:active {
+  transform: scale(0.97);
+}
+
+
+/* states */
+.loading,
+.empty-state{
+   text-align:center;
+   margin-top:40px;
+   color:#b0b0d0;
+}
+
+.empty-state h3{
+   font-size:24px;
+   margin-bottom:10px;
+}
+
+.empty-state p{
+   font-size:15px;
+   opacity:0.8;
+}
+

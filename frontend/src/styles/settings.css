@@ -1,0 +1,43 @@
+.settings-page {
+  width: 100%;
+}
+
+.page-title {
+  margin-bottom: 20px;
+}
+
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .settings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.settings-card {
+  background: #111827;
+  padding: 20px;
+
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.btn-danger {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+
+  background: #ef4444;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-danger:hover {
+  background: #dc2626;
+}
