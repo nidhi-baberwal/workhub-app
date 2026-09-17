@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { addMember } from "../../api/workspaceApi";
-import { useWorkspace } from "../../context/WorkspaceContext";
+import { useWorkspace } from "../../context/WorkspaceContextHook";
 
 const AddMember = ()=>{
    

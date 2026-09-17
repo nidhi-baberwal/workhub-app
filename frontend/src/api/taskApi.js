@@ -1,14 +1,14 @@
 import API from "./axios";
 
 //create task
-export const createTask = async(taskData, token) => {
+export const createTask = async(taskData) => {
     console.log("FRONTEND CREATE TASK CALLED");
     const res= await API.post("/tasks", taskData);
     return res.data;
 };
 
 //get all tasks by workspace
-export const getTasks = async(workspaceId, token) => {
+export const getTasks = async(workspaceId) => {
     const res = await API.get(`/tasks/${workspaceId}`); 
     return res.data;
 }; 
@@ -20,13 +20,13 @@ export const getMyTasks = async () => {
 };
 
 //update task
-export const updateTask = async(taskId, data, token) => {
+export const updateTask = async(taskId, data) => {
     const res = await API.put(`/tasks/${taskId}`, data);
     return res.data;
 };
 
 //delete task
-export const deleteTask = async(taskId, token) => {
+export const deleteTask = async(taskId) => {
     const res = await API.delete(`/tasks/${taskId}`); 
     return res.data;
 };

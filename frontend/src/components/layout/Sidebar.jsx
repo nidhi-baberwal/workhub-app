@@ -1,4 +1,4 @@
-import { useWorkspace } from "../../context/WorkspaceContext";
+import { useWorkspace } from "../../context/WorkspaceContextHook";
 import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {

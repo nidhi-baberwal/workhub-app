@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { useWorkspace } from "../context/WorkspaceContext.jsx";
+import { useWorkspace } from "../context/WorkspaceContextHook.jsx";
 import CreateWorkspace from "./WorkspacePage.jsx";
 import CreateTask from "../components/tasks/CreateTask.jsx";
-import { useTask } from "../context/TaskContext.jsx";
+import { useTask } from "../context/TaskContextHook.jsx";
 import AddMember from "../components/workspace/AddMember.jsx";
 import TaskList from "../components/tasks/TaskList.jsx";
 import MembersList from "../components/workspace/MemberList.jsx";
@@ -18,7 +18,7 @@ const Dashboard = () => {
         if (currentWorkspace?._id) {
             fetchTasks(currentWorkspace._id);
         }
-    }, [currentWorkspace?._id]);
+    }, [currentWorkspace?._id, fetchTasks]);
 
     if(!currentWorkspace){
         return <div>No workspace selected</div>;

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useWorkspace } from "../context/WorkspaceContext.jsx";
-import { createWorkspace } from "../api/workspaceApi.js";
+import { useWorkspace } from "../context/WorkspaceContextHook.jsx";
 
 const CreateWorkspace = ()=>{
     const[name, setName] = useState("");

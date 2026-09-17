@@ -1,4 +1,4 @@
-const MembersList = ({ members, owner }) => {
+const MembersList = ({ members }) => {
 
      if (!members || members.length === 0) {
         return <p>No members found</p>;

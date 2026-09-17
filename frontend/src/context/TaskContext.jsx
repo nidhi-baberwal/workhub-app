@@ -1,7 +1,6 @@
-import {  createContext, useContext, useState } from "react";
+import { useState } from "react";
+import { TaskContext } from "./TaskContextValue.jsx";
 import { createTask, getMyTasks, getTasks, updateTask, deleteTask} from "../api/taskApi.js";
-
-const TaskContext = createContext();
 
 export const TaskProvider = ({children}) => {
     const [workspaceTasks, setWorkspaceTasks] = useState([]);
@@ -87,4 +86,3 @@ export const TaskProvider = ({children}) => {
     );
 
 }
-export const useTask = () => useContext(TaskContext);

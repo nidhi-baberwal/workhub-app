@@ -1,12 +1,14 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import * as api from "../api/workspaceApi.js";
-import { useAuth } from "./AuthContext.jsx";
-
-const WorkspaceContext = createContext();
+import { useAuth } from "./AuthContextHook.jsx";
+import { WorkspaceContext } from "./WorkspaceContextValue.jsx";
 
 export const WorkspaceProvider = ({ children }) =>{
  const[workspaces, setWorkspaces] = useState([]);
- const[currentWorkspace, setCurrentWorkspace] = useState(null);
+ const[currentWorkspace, setCurrentWorkspace] = useState(() => {
+   const saved = localStorage.getItem("workspace");
+   return saved ? JSON.parse(saved) : null;
+ });
 
  const { user } = useAuth();
 
@@ -26,10 +28,22 @@ export const WorkspaceProvider = ({ children }) =>{
  };
 
  useEffect(() => {
+   if (!user) return;
 
-   if(!user) return;
+   const loadWorkspaces = async () => {
+      try {
+         const token = localStorage.getItem("token");
+         const res = await api.getWorkspaces(token);
 
-  fetchWorkspaces();
+         console.log("FRONTEND RESPONSE:", res.data);
+
+         setWorkspaces(res.data || []);
+      } catch (error) {
+         console.error("Error fetching workspaces:", error);
+      }
+   };
+
+   loadWorkspaces();
 }, [user]);
 
  //create workspace
@@ -73,13 +87,6 @@ export const WorkspaceProvider = ({ children }) =>{
    }
  };
 
- //load from localstorage
- useEffect(() => {
-    const saved = localStorage.getItem("workspace");
-    if(saved) 
-      setCurrentWorkspace(JSON.parse(saved));
- }, []);
-
  const addMemberToWorkspace = async (workspaceId, email, role = "member") => {
    const res = await api.addMember(workspaceId, {email, role});
 
@@ -122,12 +129,3 @@ export const WorkspaceProvider = ({ children }) =>{
  );
 };
 
-export const useWorkspace = ()=> {
-   const context = useContext(WorkspaceContext);
-
-if(!context){
-   throw new Error("useWorkspace must be used inside workspaceProvider")
-}
-
-return context;
-};

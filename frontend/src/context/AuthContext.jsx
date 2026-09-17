@@ -1,12 +1,14 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useState } from "react";
+import { AuthContext } from "./AuthContextValue.jsx";
 import * as api from "../api/authApi.js";
 
-const AuthContext = createContext();
-
-
 export const AuthProvider = ({ children })=>{
-    const[user, setUser] = useState(null);
-    const[loading, setLoading] = useState(true);
+    const[user, setUser] = useState(() => {
+        const savedUser = localStorage.getItem("user");
+        return savedUser ? JSON.parse(savedUser) : null;
+    });
+
+    const loading = false;
 
 
     //LOGIN
@@ -31,17 +33,6 @@ export const AuthProvider = ({ children })=>{
             setUser(null);
         };
 
-
-        //Keep user logged in after refresh
-        useEffect(() =>{
-            const savedUser = localStorage.getItem("user");
-
-            if(savedUser){
-                setUser(JSON.parse(savedUser));
-            }
-            setLoading(false);
-        }, []);
-
       return (
         <AuthContext.Provider value={{
           user,
@@ -56,12 +47,4 @@ export const AuthProvider = ({ children })=>{
       );
     };
 
-    export const useAuth = () => {
-    const context = useContext(AuthContext);
-
-    if (!context) {
-        throw new Error("AuthContext missing Provider");
-    }
-
-    return context;
-};
+    
