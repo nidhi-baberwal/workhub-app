@@ -10,7 +10,7 @@ export const createWorkspace = async(req, res) => {
     const {name} = req.body;
     console.log("NAME:", name);
 
-    const userId = new mongoose.Types.ObjectId(req.user.id);
+    const userId = req.user.id;
      console.log("USER ID:", userId);
 
     const workspace = await Workspace.create({
