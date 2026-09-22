@@ -688,3 +688,338 @@ it("should allow assigned user to update the task", async () => {
   expect(res.json).toHaveBeenCalledWith(task);
 });
 });
+
+
+describe("deleteTask", () => {
+
+  it("should delete task successfully", async () => {
+    mockTask.findByIdAndDelete.mockResolvedValue({
+      _id: "task123",
+    });
+
+    const req = {
+      params: {
+        id: "task123",
+      },
+    };
+
+    const res = {
+      json: jest.fn(),
+      status: jest.fn().mockReturnThis(),
+    };
+
+    await deleteTask(req, res);
+
+    expect(mockTask.findByIdAndDelete).toHaveBeenCalledWith("task123");
+
+    expect(res.json).toHaveBeenCalledWith({
+      message: "Task deleted",
+    });
+  });
+
+
+  it("should return 500 if deleting task fails", async () => {
+    mockTask.findByIdAndDelete.mockRejectedValue(
+      new Error("Database error")
+    );
+
+    const req = {
+      params: {
+        id: "task123",
+      },
+    };
+
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    await deleteTask(req, res);
+
+    expect(mockTask.findByIdAndDelete).toHaveBeenCalledWith("task123");
+
+    expect(res.status).toHaveBeenCalledWith(500);
+
+    expect(res.json).toHaveBeenCalledWith({
+      message: "Database error",
+    });
+  });
+
+});
+
+describe("assignTask", () => {
+
+  it("should return 404 if task is not found", async () => {
+    mockTask.findById.mockResolvedValue(null);
+
+    const req = {
+      params: {
+        taskId: "task123",
+      },
+      body: {
+        userId: "user456",
+      },
+      user: {
+        id: "owner123",
+      },
+    };
+
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    await assignTask(req, res);
+
+    expect(mockTask.findById).toHaveBeenCalledWith("task123");
+
+    expect(res.status).toHaveBeenCalledWith(404);
+
+    expect(res.json).toHaveBeenCalledWith({
+      message: "Task not found",
+    });
+  });
+
+
+  it("should return 403 if user is not workspace owner", async () => {
+    const task = {
+      _id: "task123",
+      workspace: "workspace123",
+    };
+
+    const workspace = {
+      _id: "workspace123",
+      owner: "owner123",
+    };
+
+    mockTask.findById.mockResolvedValue(task);
+    mockWorkspace.findById.mockResolvedValue(workspace);
+
+    const req = {
+      params: {
+        taskId: "task123",
+      },
+      body: {
+        userId: "user456",
+      },
+      user: {
+        id: "user789",
+      },
+    };
+
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    await assignTask(req, res);
+
+    expect(mockTask.findById).toHaveBeenCalledWith("task123");
+
+    expect(mockWorkspace.findById).toHaveBeenCalledWith("workspace123");
+
+    expect(res.status).toHaveBeenCalledWith(403);
+
+    expect(res.json).toHaveBeenCalledWith({
+      message: "Only workspace owner can assign tasks",
+    });
+
+    expect(mockUser.findById).not.toHaveBeenCalled();
+  });
+
+
+  it("should return 404 if assigned user is not found", async () => {
+    const task = {
+      _id: "task123",
+      workspace: "workspace123",
+    };
+
+    const workspace = {
+      _id: "workspace123",
+      owner: "owner123",
+    };
+
+    mockTask.findById.mockResolvedValue(task);
+    mockWorkspace.findById.mockResolvedValue(workspace);
+    mockUser.findById.mockResolvedValue(null);
+
+    const req = {
+      params: {
+        taskId: "task123",
+      },
+      body: {
+        userId: "user456",
+      },
+      user: {
+        id: "owner123",
+      },
+    };
+
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    await assignTask(req, res);
+
+    expect(mockUser.findById).toHaveBeenCalledWith("user456");
+
+    expect(res.status).toHaveBeenCalledWith(404);
+
+    expect(res.json).toHaveBeenCalledWith({
+      message: "User not found",
+    });
+  });
+
+
+  it("should return 400 if user is not in workspace", async () => {
+    const task = {
+      _id: "task123",
+      workspace: "workspace123",
+    };
+
+    const workspace = {
+      _id: "workspace123",
+      owner: "owner123",
+      members: [
+        {
+          user: "anotherUser",
+        },
+      ],
+    };
+
+    const user = {
+      _id: "user456",
+      name: "Test User",
+      email: "test@example.com",
+    };
+
+    mockTask.findById.mockResolvedValue(task);
+    mockWorkspace.findById.mockResolvedValue(workspace);
+    mockUser.findById.mockResolvedValue(user);
+
+    const req = {
+      params: {
+        taskId: "task123",
+      },
+      body: {
+        userId: "user456",
+      },
+      user: {
+        id: "owner123",
+      },
+    };
+
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    await assignTask(req, res);
+
+    expect(mockUser.findById).toHaveBeenCalledWith("user456");
+
+    expect(res.status).toHaveBeenCalledWith(400);
+
+    expect(res.json).toHaveBeenCalledWith({
+      message: "User not in workspace",
+    });
+  });
+
+
+  it("should assign task successfully", async () => {
+    const task = {
+      _id: "task123",
+      workspace: "workspace123",
+      assignedTo: null,
+      save: jest.fn().mockResolvedValue(true),
+    };
+
+    const workspace = {
+      _id: "workspace123",
+      owner: "owner123",
+      members: [
+        {
+          user: "user456",
+        },
+      ],
+    };
+
+    const user = {
+      _id: "user456",
+      name: "Test User",
+      email: "test@example.com",
+    };
+
+    mockTask.findById.mockResolvedValue(task);
+    mockWorkspace.findById.mockResolvedValue(workspace);
+    mockUser.findById.mockResolvedValue(user);
+
+    const req = {
+      params: {
+        taskId: "task123",
+      },
+      body: {
+        userId: "user456",
+      },
+      user: {
+        id: "owner123",
+      },
+    };
+
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    await assignTask(req, res);
+
+    expect(mockTask.findById).toHaveBeenCalledWith("task123");
+
+    expect(mockWorkspace.findById).toHaveBeenCalledWith("workspace123");
+
+    expect(mockUser.findById).toHaveBeenCalledWith("user456");
+
+    expect(task.assignedTo).toBe("user456");
+
+    expect(task.save).toHaveBeenCalled();
+
+    expect(res.status).toHaveBeenCalledWith(200);
+
+    expect(res.json).toHaveBeenCalledWith(task);
+  });
+
+  it("should return 500 if assigning task fails", async () => {
+  mockTask.findById.mockRejectedValue(
+    new Error("Database error")
+  );
+
+  const req = {
+    params: {
+      taskId: "task123",
+    },
+    body: {
+      userId: "user456",
+    },
+    user: {
+      id: "owner123",
+    },
+  };
+
+  const res = {
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn(),
+  };
+
+  await assignTask(req, res);
+
+  expect(mockTask.findById).toHaveBeenCalledWith("task123");
+
+  expect(res.status).toHaveBeenCalledWith(500);
+
+  expect(res.json).toHaveBeenCalledWith({
+    message: "Database error",
+  });
+});
+
+});
