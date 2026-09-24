@@ -7,6 +7,7 @@ import taskRoutes from "./routes/taskRoutes.js";
 
 const app = express();
 
+// CI/CD deployment test
 //Log every request
 app.use((req, res, next) => {
   console.log("HIT:", req.method, req.url);
