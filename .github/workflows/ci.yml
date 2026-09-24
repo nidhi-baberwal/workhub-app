@@ -37,4 +37,4 @@ jobs:
       - name: Notify Vercel
         uses: vercel/repository-dispatch/actions/status@v1
         with:
-          name: "Vercel - workhub-app"
+          name: "Vercel - workhub-app: lint"
